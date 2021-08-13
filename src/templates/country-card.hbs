@@ -1,18 +1,18 @@
 <div class="country">
     <div class="country-image">
-        <img src="{{image}}" alt="{{name}}-flag" class="country-image__flag"/>
+        <img src="{{0.flag}}" alt="{{0.name}}-flag" class="country-image__flag"/>
     </div>
     <div class="country-content">
-        <h2 class="country-name">{{name}}</h2>
-        <p class="country-capital">Capital: {{capital}}</p>
+        <h2 class="country-name">{{0.name}}</h2>
+        <p class="country-capital">Capital: {{0.capital}}</p>
 
-        <p class="country-population">Population: {{population}}</p>
+        <p class="country-population">Population: {{0.population}}</p>
         
-        <p class="country-languages">Languages: {{languages}}</p>
+        <p class="country-languages">Languages:</p>
 
         <ul class="country-languages__list">
-            {{#each languages}}
-            <li class="country-languages__item">{{this}}</li>
+            {{#each 0.languages}}
+            <li class="country-languages__item">{{name}}</li>
             {{/each}}
         </ul>
     </div>
