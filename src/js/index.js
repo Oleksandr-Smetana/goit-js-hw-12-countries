@@ -63,6 +63,6 @@ function renderCountryList(countries) {
 function onError() {
   error({
     text: 'There no such country. Try again!',
-    delay: 40000,
+    delay: 4000,
   });
 }
