@@ -18,32 +18,33 @@ const debouncedSearch = debounce(onSearch, 500);
 refs.inputElt.addEventListener('input', debouncedSearch);
 
 function onSearch(e) {
-  const searchQuery = e.target.value;
+  const searchQuery = e.target.value.trim();
 
-  API.fetchCountries(searchQuery)
-    .then(countries => {
-      //   console.log(countries);
-      if (countries.length === 1) {
-        renderCountryCard(countries);
-      }
-      if (countries.length > 1 && countries.length < 11) {
-        renderCountryList(countries);
-      }
-      if (countries.length > 10) {
-        refs.countryContainerElt.innerHTML = '';
-        notice({
-          text: `We found ${countries.length} countries. Please enter a more specific query!`,
-          delay: 4000,
-        });
-      }
-      // when the country name is entered incorrectly
-      if (countries.status === 404) {
-        refs.countryContainerElt.innerHTML = '';
-        onError();
-      }
-    })
-    .catch(onError)
-    .finally(() => (e.target.value = ''));
+  if (searchQuery !== '') {
+    API.fetchCountries(searchQuery)
+      .then(countries => {
+        //   console.log(countries);
+        if (countries.length === 1) {
+          renderCountryCard(countries);
+        }
+        if (countries.length > 1 && countries.length < 11) {
+          renderCountryList(countries);
+        }
+        if (countries.length > 10) {
+          refs.countryContainerElt.innerHTML = '';
+          notice({
+            text: `We found ${countries.length} countries. Please enter a more specific query!`,
+            delay: 2000,
+          });
+        }
+        // when the country name is entered incorrectly
+        if (countries.status === 404) {
+          refs.countryContainerElt.innerHTML = '';
+          onError();
+        }
+      })
+      .catch(onError);
+  }
 }
 
 function renderCountryCard(country) {
@@ -63,6 +64,6 @@ function renderCountryList(countries) {
 function onError() {
   error({
     text: 'There no such country. Try again!',
-    delay: 4000,
+    delay: 2000,
   });
 }
